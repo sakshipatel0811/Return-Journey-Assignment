@@ -12,16 +12,18 @@ const ItemList = ({ items, currentPage, limit }) => {
     () => currentPage * limit,
     [currentPage, limit]
   );
-  
+
   return (
     <div className=" mt-3 rounded-lg">
-      {items?.slice(sliceStartIndex, sliceEndIndex)?.map((itemInfo) => {
-        return (
-          <React.Fragment key={itemInfo?.productId}>
-            <Item itemInfo={itemInfo} />
-          </React.Fragment>
-        );
-      })}
+      <ul>
+        {items?.slice(sliceStartIndex, sliceEndIndex)?.map((itemInfo) => {
+          return (
+            <li key={itemInfo?.productId} className="item-list">
+              <Item itemInfo={itemInfo} />
+            </li>
+          );
+        })}
+      </ul>
       {!items?.length && (
         <div className="flex justify-center py-5">No Items Found</div>
       )}
@@ -29,4 +31,4 @@ const ItemList = ({ items, currentPage, limit }) => {
   );
 };
 
-export default memo(ItemList); // here React.memo is used for making this component a pure component so that this will render only when its prop changes
+export default memo(ItemList); // here React.memo is used for making this component a pure component so that this will re-render only when its prop changes
